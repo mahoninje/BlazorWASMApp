@@ -1,0 +1,39 @@
+﻿@inherits LayoutComponentBase
+@inject CustomAuthStateProvider CustomAuthStateProvider
+@inject NavigationManager NavigationManager
+
+<AuthorizeView>
+    <NotAuthorized>
+        <RedirectToLoginPage/>
+    </NotAuthorized>
+</AuthorizeView>
+
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+            <AuthorizeView>
+                <Authorized>
+                    <a @onclick="Logout" href="#">Logout</a>
+                </Authorized>
+            </AuthorizeView>
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+@code{
+    private void Logout()
+    {
+        CustomAuthStateProvider.LogOut();
+        NavigationManager.NavigateTo("/login", true);
+    }
+}

@@ -1,0 +1,8 @@
+﻿@inject IUserLocalStorageService LocalStorageService
+
+@code {
+    protected override void OnInitialized()
+    {
+        LocalStorageService.InitLocalStorage();
+    }
+}

@@ -1,0 +1,12 @@
+﻿@page "/admin"
+@using BlazorWASMApp.Auth.Implementations.Services
+@inject IUserLocalStorageService localStorage
+@attribute [Authorize(Roles="Admin")]
+
+<PageTitle>High permission page</PageTitle>
+
+<AuthorizeView Roles="Admin">
+    <Authorized>
+        Welcome <b>@context.User.Identity?.Name</b>. This is page two, allowed only for admins!
+    </Authorized>
+</AuthorizeView>
